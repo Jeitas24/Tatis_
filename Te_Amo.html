@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Nuestra Historia ❤️</title>
+
+<style>
+body{
+  margin:0;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  font-family:'Segoe UI', sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  text-align:center;
+  overflow:hidden;
+  transition:all 1s ease;
+  color:#6a0572;
+}
+
+#container{
+  max-width:750px;
+  padding:20px;
+}
+
+input{
+  padding:12px;
+  font-size:18px;
+  border-radius:25px;
+  border:none;
+  text-align:center;
+  outline:none;
+}
+
+button{
+  padding:12px 28px;
+  font-size:18px;
+  border:none;
+  border-radius:25px;
+  background:#ff4d6d;
+  color:white;
+  cursor:pointer;
+  margin:12px;
+  transition:all 0.3s ease;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+.fade{
+  animation:fadeIn 2s forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="container"></div>
+
+<script>
+
+const container = document.getElementById("container");
+
+/* ----------- PANTALLA INICIAL ----------- */
+
+container.innerHTML = `
+<h1>💌 Mensaje especial para ti 💌</h1>
+<p>Ingresa nuestra fecha especial para abrirlo</p>
+<input type="password" id="password" placeholder="YYYYMMDD">
+<br>
+<button onclick="checkPassword()">Abrir</button>
+<p id="error" style="color:red;"></p>
+`;
+
+function checkPassword(){
+  const pass = document.getElementById("password").value;
+
+  if(pass === "20251211"){
+    startSequence();
+  } else {
+    document.getElementById("error").innerText = "Esa no es nuestra fecha ❤️";
+  }
+}
+
+/* ----------- SECUENCIA ROMÁNTICA ----------- */
+
+function startSequence(){
+
+  const sequence = [
+    "Desbloqueando recuerdos hermosos...",
+    "Activando sonrisas compartidas...",
+    "Cargando momentos inolvidables...",
+    "Hola, TATIS ❤️"
+  ];
+
+  let index = 0;
+
+  function play(){
+    if(index < sequence.length){
+      container.innerHTML = "<h1>" + sequence[index] + "</h1>";
+      index++;
+      setTimeout(play, 2200);
+    } else {
+      romanticMode();
+    }
+  }
+
+  play();
+}
+
+/* ----------- CONTADOR ----------- */
+
+function romanticMode(){
+  container.innerHTML = `
+    <h1 class="fade">
+      Han pasado ${calculateDays()} días desde que comenzó nuestra historia ❤️
+    </h1>
+    <button onclick="question()">Continuar</button>
+  `;
+}
+
+function calculateDays(){
+  const startDate = new Date("2025-12-11");
+  const today = new Date();
+  const difference = today - startDate;
+  return Math.floor(difference / (1000*60*60*24));
+}
+
+/* ----------- PREGUNTA ----------- */
+
+let size = 18;
+
+function question(){
+  container.innerHTML = `
+    <h1>¿Quieres continuar esta historia conmigo? 💖</h1>
+    <button id="yesBtn" onclick="finalLetter()">Siempre</button>
+    <button id="noBtn" onclick="growYes()">No</button>
+  `;
+}
+
+function growYes(){
+  size += 8;
+  document.getElementById("yesBtn").style.fontSize = size + "px";
+}
+
+/* ----------- CARTA FINAL ----------- */
+
+function finalLetter(){
+
+  document.body.style.background = "linear-gradient(135deg,#ffe6f0,#ffd1dc)";
+  document.body.style.color = "#6a0572";
+
+  container.innerHTML = `
+  <div class="fade" style="text-align:left;">
+  <h2>Mi amor,</h2>
+  <p>
+  Hoy no quería dejar pasar el día sin decirte algo que quizás, entre el ruido de la rutina y las prisas de la mañana, se nos olvida mencionar: admiro profundamente la mujer que eres.
+  </p>
+  <p>
+  Te veo cada mañana levantarte con esa determinación que te caracteriza. Sé que hay días en los que el cansancio pesa o el camino parece cuesta arriba, pero ahí estás tú, con esa valentía silenciosa, poniéndote de pie una vez más. Esa fuerza no es casualidad; es el reflejo de un corazón que sabe en quién ha puesto su confianza.
+  </p>
+  <p>
+  Eres una mujer maravillosa, no solo por lo que haces, sino por la esencia que irradias. Me encanta ver cómo dejas que Dios guíe tus pasos y cómo intentas reflejar Su amor en los detalles más pequeños. Ver tu fe en acción, esa forma en la que buscas ser mejor y cómo cuidas de los tuyos, es algo que me inspira y me hace sentir el hombre más afortunado por caminar a tu lado.
+  </p>
+  <p>
+  Eres una "mujer de Dios" no porque seas perfecta, sino porque eres valiente, eres real y porque tu brillo viene de un lugar mucho más profundo que lo físico. Gracias por no rendirte, por ser mi apoyo y por permitirme ser testigo de la obra de arte que Él está haciendo en ti.
+  </p>
+  <p>
+  Que nunca se te olvide lo mucho que vales y lo orgulloso que estoy de la mujer guerrera y virtuosa que tengo frente a mí.
+  </p>
+  <br>
+  <p><strong>Con todo mi amor,<br>Jeisson ❤️</strong></p>
+  </div>
+  `;
+
+  setInterval(createHeart, 300);
+}
+
+/* ----------- CORAZONES ----------- */
+
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.innerHTML = "💖";
+  heart.style.position = "absolute";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.top = "-10px";
+  heart.style.fontSize = "20px";
+  heart.style.animation = "fall 4s linear";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>heart.remove(),4000);
+}
+
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes fall{
+  to{ transform: translateY(100vh); }
+}`;
+document.head.appendChild(style);
+
+</script>
+
+</body>
+</html>
